@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hai Kamu! ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(43, 31, 62, 0.8), rgba(244, 143, 177, 0.4)), 
+                        url('https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?q=80&w=1000') no-repeat center center/cover;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bg-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 
+                        0 0 30px rgba(244, 143, 177, 0.2);
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            display: none;
+            z-index: 2;
+            animation: cardAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* --- STYLE & ANIMASI STIKER BERGERAK --- */
+        .emoji-box {
+            font-size: 85px; 
+            margin-bottom: 15px;
+            display: inline-block;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            animation: stickerDance 2s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+
+        @keyframes stickerDance {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            20% { transform: scale(1.1, 0.9) rotate(-5deg); }
+            40% { transform: scale(0.9, 1.1) rotate(5deg) translateY(-10px); }
+            60% { transform: scale(1.05, 0.95) rotate(-3deg) translateY(0); }
+            80% { transform: scale(0.98, 1.02) rotate(3deg); }
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to right, #ffffff, #ffe4e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.15);
+        }
+
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-yes {
+            background: linear-gradient(45deg, #ff758f, #ff4d6d, #c77dff);
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 77, 109, 0.5);
+            background-position: right center;
+            animation-play-state: paused;
+        }
+
+        .btn-no {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-no:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+        }
+
+        .btn-wa {
+            background: linear-gradient(45deg, #00b4d8, #00f5d4);
+            color: #1d3557;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 245, 212, 0.35);
+            font-weight: 700;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .heart-row {
+            color: #ff4d6d;
+            font-size: 26px;
+            letter-spacing: 5px;
+            margin-top: 12px;
+            filter: drop-shadow(0 2px 8px rgba(255, 77, 109, 0.4));
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.05); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 117, 143, 0.4);
+            pointer-events: none;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-hearts" id="heartBg"></div>
+
+    <div class="card" id="mainCard">
+        <div class="emoji-box" id="displayEmoji">🐱</div>
+        <h1 id="displayTitle">Hai, User! ✨</h1>
+        <p id="displayText">Aku punya sesuatu nih buat kamu..</p>
+        
+        <div class="btn-wrapper" id="displayButtons">
+            <button class="btn btn-yes" onclick="nextStage()">Klik Aku ✉️</button>
+        </div>
+    </div>
+
+    <script>
+        let namaUser = "";
+        let currentStage = 1;
+        let rejectedCount = 0;
+
+        function createBgHearts() {
+            const container = document.getElementById('heartBg');
+            const heartSymbols = ['❤️', '💖', '✨', '🌸'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 7000);
+            }, 400);
+        }
+
+        window.onload = function() {
+            createBgHearts();
+            
+            setTimeout(() => {
+                let nama = prompt("Masukin Nama Kamu:");
+                if (nama === null || nama.trim() === "") {
+                    namaUser = "Kamu";
+                } else {
+                    namaUser = nama;
+                }
+                
+                document.getElementById('displayTitle').innerHTML = `Hai, ${namaUser} ✨`;
+                document.getElementById('mainCard').style.display = 'block';
+            }, 300);
+        };
+
+        function nextStage() {
+            currentStage++;
+            const emoji = document.getElementById('displayEmoji');
+            const text = document.getElementById('displayText');
+            const buttons = document.getElementById('displayButtons');
+
+            if (currentStage === 2) {
+                emoji.innerHTML = '👉👈';
+                text.innerHTML = 'Sekarang aku mau bilang..<br><br><b>Ikan Paus Makan Tahu<br>Akuuu kangen kamuu ><<br>i miss uuuuu</b><br><div class="heart-row">❤️❤️❤️❤️❤️</div>';
+                buttons.innerHTML = `<button class="btn btn-yes" onclick="nextStage()">Lanjut</button>`;
+            } 
+            else if (currentStage === 3) {
+                emoji.innerHTML = '🥺';
+                text.innerHTML = `${namaUser} kangen aku gak? 🐻❤️<br><br>Ayo jawab jujur!`;
+                buttons.innerHTML = `
+                    <button class="btn btn-yes" id="yesButton" onclick="nextStage()">Kangen</button>
+                    <button class="btn btn-no" id="noButton" onclick="handleRejection()">Engga</button>
+                `;
+            } 
+            else if (currentStage === 4) {
+                emoji.innerHTML = '🥰';
+                text.innerHTML = '<b>OK!</b><br><br>Kirim jawabannya ke WhatsApp aku, ya!';
+                
+                // Ubah nomor WA di sini (awali dengan 62)
+                const whatsappNumber = 085811471126"; 
+                const messageText = encodeURIComponent(`Iyaa, ${namaUser} kangen kamu juga kok! >< ❤️`);
+                
+                buttons.innerHTML = `
+                    <a href="https://wa.me/${whatsappNumber}?text=${messageText}" target="_blank" class="btn btn-yes btn-wa">
+                        Balas Ke WA
+                    </a>
+                `;
+            }
+        }
+
+        function handleRejection() {
+            rejectedCount++;
+            const yesBtn = document.getElementById('yesButton');
+            const noBtn = document.getElementById('noButton');
+            
+            let currentFontSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentFontSize + 6) + 'px';
+            yesBtn.style.padding = (14 + rejectedCount * 4) + 'px ' + (32 + rejectedCount * 12) + 'px';
+            
+            if (rejectedCount === 1) noBtn.innerHTML = "Yakin?";
+            if (rejectedCount === 2) noBtn.innerHTML = "Harus Kangen!";
+            if (rejectedCount >= 3) {
+                noBtn.style.display = 'none'; 
+            }
+        }
+    </script>
+</body>
+</html>
